@@ -40,5 +40,32 @@ namespace QuickSearch
                  System.Diagnostics.Process.Start("http://ejje.weblio.jp/content/" + textBox1.Text);
             }
         }
+
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //×ボタンを押したときの処理
+            if(e.CloseReason != CloseReason.ApplicationExitCall)
+            {
+                e.Cancel = true;
+                this.Visible = false;
+            }
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.Visible = true;
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                this.WindowState = FormWindowState.Normal;
+            }
+            this.Activate();
+        }
+
+        private void 終了ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            notifyIcon1.Visible = false; // アイコンをトレイから取り除く
+            Application.Exit(); // アプリケーションの終了
+        }
     }
 }
